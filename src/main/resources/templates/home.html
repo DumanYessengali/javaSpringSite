@@ -1,0 +1,1104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        <!-- to manage on mobile browsers -->
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Montserrat:300i,400,700&amp;subset=cyrillic-ext" rel="stylesheet">      <!--  to add different font-families  -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">       <!--  bootstrap -->
+    <script>
+        $(function() {           /*$(document).ready(function() { ... });*/   /*A function that will start after the DOM has fully loaded*/
+
+            var headpoint = $("#header"),                               //calling the report function with id= " header"     -------- // вызываю функцию отчет с id="header"
+                intpoint = $("#intro").innerHeight(),                  //calling the report function with id= " intro"      -------- // вызываю функцию отчет с id="header"
+                scrolling = $(window).scrollTop();           //for the current scroll page                           -------- // для текущего scroll страницы чтобы при обнавление оставалось
+
+
+/////////////////////////////////////////////////////first function
+
+
+            functionToScroll(scrolling);                          //scroll function for fixing header
+
+            $(window).on("scroll", function() {
+                scrolling = $(this).scrollTop();
+
+                functionToScroll(scrolling);
+            });
+
+            function functionToScroll(scrolling) {                //the function checks if (scrolling >= intpoint) the header becomes fixed
+                if( scrolling >= intpoint ) {
+                    headpoint.addClass("fixed");
+                } else {
+                    headpoint.removeClass("fixed");
+                }
+            }
+
+
+/////////////////////////////////////////////////////second function
+            $("#nawShow").on("click", function() {            //to make hamburger menu open when clicked
+                $(this).toggleClass("active");                //this function for the cross in the menu when clicked
+                $("#nav").toggleClass("active");              //this function for open the hamburger menu
+            });
+
+/////////////////////////////////////////////////////third function
+            $("[data-slider]").slick({                  //to make the slider move when clicked
+                infinite: true,
+                slidesToShow: 1,                        //for show only one slider, if I write 2 we can show two slider
+                slidesToScroll: 1                       //for show the slider
+            });
+
+        });
+
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+
+        /*  --------------Container-------------- */
+        .container {
+            width: 100%;
+            max-width: 1230px;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+        /*----------------------------------------*/
+
+
+        /* ---------------Intro------------------ */
+        .intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            min-height: 820px;
+            position: relative;
+
+            background: url("https://sun9-62.userapi.com/c854020/v854020656/1c8875/H67tsVUzv5k.jpg") center no-repeat;
+            -webkit-background-size: cover;
+
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .introText {
+            width: 100%;
+            max-width: 880px;
+            margin: 0 auto;
+
+            text-align: center;
+        }
+
+        .introTitle {
+            margin-bottom: 20px;
+
+            font-family: 'Kaushan Script', cursive;
+            font-size: 72px;
+            color: #fff;
+        }
+        /*------------------------------------------*/
+
+
+
+        /* ---------------Header------------------- */
+        .header {
+            width: 100%;
+            padding-top: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header.fixed {
+            padding: 10px 0;
+            background-color: #6EC5EB;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: translate3d(0, 0, 0);
+        }
+
+
+        .headerMenu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+
+        /* -------------Nav--------------- */
+        .nav {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .navLink {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 15px;
+            position: relative;
+
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color .1s linear;
+        }
+
+        .navLink:hover {
+            color: #fce38a;
+        }
+
+
+        .nawShow {
+            width: 30px;
+            padding: 10px 0;
+            display: none;
+
+            font-size: 0;
+            color: transparent;
+
+            border: 0;
+            background: none;
+            cursor: pointer;
+
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            z-index: 1;
+        }
+
+        .nawShowBurger {
+            display: block;
+            width: 100%;
+            height: 3px;
+
+            background-color: #fff;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+
+            transition: background .2s linear;
+        }
+
+        .nawShow.active .nawShowBurger {
+            background: none;
+        }
+
+        .nawShowBurger:before,
+        .nawShowBurger:after {
+            content: "";
+            width: 100%;
+            height: 3px;
+
+            background-color: #fff;
+
+            position: absolute;
+            left: 0;
+            z-index: 1;
+
+            transition: transform .2s linear;
+        }
+
+        .nawShowBurger:before {
+            top: -8px;
+        }
+
+        .nawShowBurger:after {
+            bottom: -8px;
+        }
+
+        .nawShow.active .nawShowBurger:before {
+            transform-origin: left top;
+            transform: rotate(45deg) translate3d(0px, -2px, 0)
+        }
+
+        .nawShow.active .nawShowBurger:after {
+            transform-origin: left bottom;
+            transform: rotate(-45deg) translate3d(0px, 3px, 0);
+        }
+
+        .button {
+            display: inline-block;
+            vertical-align: top;
+            padding: 8px 30px;
+
+            border: 3px solid #fff;
+
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+
+            transition: background .1s linear, color .1s linear;
+        }
+
+        .button:hover {
+            background-color: #fff;
+            color: #333;
+        }
+
+
+        /*-------------------Section----------------------*/
+        .section {
+            padding: 50px 0;
+
+            display: grid;
+            grid-column: 1fr 1fr;
+        }
+        .sectionHeader {
+            width: 100%;
+            max-width: 950px;
+            margin: 0 auto 50px;
+
+            text-align: center;
+        }
+
+        .sectionTitle {
+            font-size: 30px;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
+        }
+        /*------------------------------------------------*/
+
+        /* --------------------block1---------------------*/
+        .block1{
+            margin: 40px -15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .block1Item {
+            width: 25%;
+            padding: 0 15px;
+        }
+
+        .block1Section {
+            position: relative;
+            background-color: #FFE773;
+        }
+
+        .block1Section:hover .block1Img {
+            transform: translate3d(-10px, -10px, 0);
+        }
+
+        .block1Section:hover .block1Img img {
+            opacity: .1;
+        }
+
+        .block1Section:hover .block1Text {
+            opacity: 1;
+        }
+
+        .block1Img {
+            background-image: /*linear-gradient(to bottom, #5ccccc, #74c594, #a9b45c, #dd974c, #ff7373)*/ #434449;
+
+            transition: transform .2s linear;
+        }
+
+        .block1Img img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            transition: opacity .1s linear;
+        }
+
+        .block1Text {
+            width: 100%;
+
+            font-size: 18px;
+            color: black;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            opacity: 0;
+
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 2;
+            transform: translate3d(0, -50%, 0);
+
+            transition: opacity .2s linear;
+        }
+        /* ----------------------------------------- */
+
+        /*-------------------decor-------------------*/
+        .decor{
+            display: flex;
+        }
+
+        .decorCol {
+            flex: 1 1 0;
+        }
+
+        .decorSection {
+            position: relative;
+
+            background-image: linear-gradient(to right top, #6bd1cd, #5cccd8, #56c5e1, #5cbee7, #6bb5ea, #6ab8ef, #6abcf3, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+        }
+
+        .decorSection:hover .decorImg {
+            opacity: .1;
+        }
+
+        .decorSection:hover .decorName {
+            opacity: 1;
+        }
+
+        .decorImg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+
+            transition: opacity .2s linear;
+        }
+
+        .decorName {
+            width: 100%;
+            padding: 0 15px;
+
+            text-align: center;
+            color: black;
+            opacity: 0;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 1;
+
+            transform: translate3d(0, -50%, 0);
+            transition: opacity .2s linear;
+        }
+
+        .decorTitle {
+            margin-bottom: 5px;
+
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        /*----------------------------------------*/
+        /*-----------Map -----------*/
+        .section2{
+            padding: 50px 0;
+            display: grid;
+            grid-column: 1fr 1fr;
+        }
+        .map-container{
+            overflow:hidden;
+            padding-bottom:56.25%;
+            position:relative;
+            height:0;
+        }
+        .map-container iframe{
+            left:0;
+            top:0;
+            height:100%;
+            width:100%;
+            position:absolute;
+        }
+        /* -------------------------*/
+
+
+
+        /* ------------Footer------------- */
+        .footer {
+            padding-top: 30px;
+            background-color: #E7EAED;
+        }
+
+        .footerSection {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 -15px;
+            padding-bottom: 30px;
+        }
+
+        .footerCol {
+            padding: 0 15px;
+        }
+
+        .footer__col--first {
+            width: 40%;
+        }
+
+        .footer__col--second {
+            width: 29%;
+        }
+
+        .footer__col--third {
+            width: 22%;
+        }
+
+        .footerLogo {
+            margin-bottom: 30px;
+
+            font-size: 35px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .footerText {
+            margin-bottom: 30px;
+
+            font-size: 15px;
+            color: #333;
+        }
+
+        .footerSocial {
+            margin-bottom: 25px;
+        }
+
+        .footerSocial-content {
+            padding-top: 15px;
+
+            /*   font-size: 15px;
+               color: #999;
+               font-style: italic;
+               font-weight: 300;*/
+        }
+
+        .footerSocial-content a {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+
+            font-size: 18px;
+            color: #95e1d3;
+        }
+
+        .footerTitle {
+            margin: 30px 0;
+
+            font-size: 14px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        /*------------------------------*/
+
+
+        /*----- soltial media -----*/
+        ul{
+            position: relative;
+            margin-top:  10px;
+            padding: 0;
+            display: flex;
+        }
+
+        ul li{
+            position: relative;
+            list-style: none;
+            width: 50px;
+            height: 50px;
+            margin: 0 30px;
+            transform: rotate(-30deg) skew(25deg);
+        }
+        ul li span{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            transition: 0.5s;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 27px !important;
+        }
+        ul li:hover span{
+            box-shadow: -1px 1px 1px rgba(0,0,0,.1);
+        }
+        ul li:hover span:nth-child(5){
+            transform: translate(40px, -40px);
+            opacity: 1;
+        }
+        ul li:hover span:nth-child(4){
+            transform: translate(30px, -30px);
+            opacity: .8;
+
+        }
+        ul li:hover span:nth-child(3){
+            transform: translate(20px, -20px);
+            opacity: .6;
+
+        }
+        ul li:hover span:nth-child(2){
+            transform: translate(10px, -10px);
+            opacity: .4;
+        }
+        ul li:hover span:nth-child(1){
+            transform: translate(0, 0);
+            opacity: .2;
+        }
+        ul li:nth-child(1) span{
+            background: #3b5999;
+        }
+        ul li:nth-child(2) span{
+            background: #55acee;
+        }
+        ul li:nth-child(3) span{
+            border: linear-gradient(to right top, #fec260, #FF7E32, #FC0175, #CF029B, #7F16D3);
+            background-image: linear-gradient(to right top, #fec260, #FF7E32, #FC0175, #CF029B, #7F16D3);
+        }
+
+        /*-------soltial media -------*/
+
+
+        .footerSection1 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footerImg {
+            width: 120px;
+            height: 80px;
+        }
+
+        .footerContent {
+            padding-left: 20px;
+        }
+
+        .footerWords {
+            display: block;
+            margin-bottom: 5px;
+
+            color: #333;
+            font-size: 12px;
+            line-height: 1.5;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .footerWords:hover {
+            text-decoration: underline;
+        }
+
+        .footerSection2{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footerBlock {
+            width: 33%;
+            border-bottom: 1px solid #fff;
+        }
+
+        .footerBlock img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+
+        .footerend {
+            padding: 10px 0;
+
+            border-top: 1px solid #1D3139;
+            line-height: 60%;
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+        /*-------------------------------------*/
+
+
+
+        @media (max-width: 1224px) {
+
+            /* ----Intro--- */
+            .introTitle {
+                font-size: 52px;
+            }
+            /*--------------*/
+        }
+
+        @media (max-width: 990px) {
+
+            /* ---Intro--- */
+            .introTitle {
+                font-size: 32px;
+            }
+            /*-------------*/
+
+            /* ----Footer---- */
+            .footer__col--first {
+                width: 100%;
+            }
+
+            .footer__col--second,
+            .footer__col--third {
+                width: 50%;
+            }
+
+            .footerSection2{
+                justify-content: flex-start;
+            }
+
+            .footerBlock {
+                width: 33.33%;
+                border-right: 1px solid white;
+            }
+            /*------------------*/
+        }
+
+        @media (max-width: 768px) {
+
+            /* ----Intro--- */
+            .intro {
+                min-height: 650px;
+            }
+            /*--------------*/
+
+            /* ----Header---- */
+            .header {
+                padding: 10px 0;
+            }
+
+            /* -----Nav---- */
+            .nav {
+                display: none;
+                width: 100%;
+
+                position: absolute;
+                top: 100%;
+                left: 0;
+
+                background-color: #6EC5EB;
+            }
+
+            .nav.active {
+                display: block;
+            }
+
+            .navLink {
+                display: block;
+                margin: 0;
+                padding: 8px 20px;
+            }
+
+            .nawShow {
+                display: block;
+            }
+            /*--------------*/
+
+            /* ------Section----- */
+            .section {
+                padding: 40px 0;
+            }
+            /*--------------------*/
+
+            /* ------block1------ */
+            .block1{
+                margin-top: 50px;
+                justify-content: center;
+            }
+
+            .block1Item {
+                width: 100%;
+                max-width: 410px;
+                margin-bottom: 30px;
+            }
+
+            .block1Item:last-child {
+                margin-bottom: 0;
+            }
+            /*--------------------*/
+            /* ------decor--------*/
+            .decor{
+                flex-wrap: wrap;
+            }
+
+            .decorCol {
+                flex: none;
+                width: 50%;
+            }
+            /*--------------------*/
+
+            /* ------Footer------ */
+            .footer__col--second,
+            .footer__col--third {
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 550px) {
+
+            /* -------Intro------- */
+            .introTitle {
+                font-size: 22px;
+            }
+            /*---------------------*/
+
+            /* -------Section------- */
+            .sectionHeader {
+                margin-bottom: 50px;
+            }
+            /*---------------------*/
+
+            .sectionTitle {
+                font-size: 24px;
+            }
+
+            .sectionTitle:after {
+                margin: 20px auto;
+            }
+
+
+            /* -------decor-------*/
+            .decorCol {
+                width: 100%;
+            }
+            /*---------------------*/
+
+
+            /* -------Blogs------- */
+            .footerImg {
+                width: 80px;
+                height: 50px;
+            }
+
+            .footerWords {
+                font-size: 10px;
+            }
+            /*---------------------*/
+        }
+    </style>
+    <title th:text="${title}"/>
+</head>
+<body>
+
+<!--class,id teg name -->         <!-- comments for teacher;) -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<header th:insert="blocks/header :: header"></header>
+
+
+<section id="main_____information">           <!-- section -->            <!-- main_____information there stay main content of page  -->
+    <!-- Intro -->
+    <header th:insert="blocks/intro :: intro"></header>
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+    <section class="section">                 <!-- section -->            <!-- block where stay some visual contents -->
+        <div class="container">               <!-- container  -->         <!-- where stay content -->
+            <div class="sectionHeader">       <!-- sectionHeader -->      <!-- information what content will be stay -->
+                <a href="/recipes" style="text-decoration: none;"><h2 class="sectionTitle">Our cakes</h2></a>
+            </div>                            <!-- sectionHeader -->
+            <div class="block1">              <!-- block1 -->
+                <div class="block1Item">      <!-- block1Item -->         <!-- there stay photo and name of the dessert -->
+                    <div class="block1Section">
+                        <a href="cake.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2018/02/image154.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Author's cakes</div>
+                        </a>
+                    </div>
+                </div>                        <!-- block1Item -->
+                <div class="block1Item">      <!-- there repeat information what I mentioned before -->
+                    <div class="block1Section">
+                        <a href="cake.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2015/10/Tort-mango-malina-obshh-vid.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Berry cakes</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="block1Item">      <!-- there repeat information what I mentioned before -->
+                    <div class="block1Section">
+                        <a href="cake.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2018/06/NEW-shoko-vishnya-2.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Chocolate cake</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="block1Item">      <!-- there repeat information what I mentioned before -->
+                    <div class="block1Section">
+                        <a href="cake.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2014/11/napoleon-2017.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Classic cakes</div>
+                        </a>
+                    </div>
+                </div>
+            </div>                       <!-- /block1 -->
+        </div>                           <!-- /.container -->
+    </section>
+    <!-- -------------------------------------------------------------------------------------------------------------------------- -->
+    <section class="section" style="background-color: #F5F5F5">     <!-- identical block, but I change informaion which stay inside -->
+        <div class="container">
+            <div class="sectionHeader">
+                <a href="eclairs.html" style="text-decoration: none;"><h2 class="sectionTitle">Eclairs</h2></a>
+            </div>
+            <div class="block1">
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="eclairs.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2019/11/IMG_7741-350x350.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Set Of Eclairs</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="eclairs.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2016/02/IMG_3423-350x350.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Vanilla eclairs</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="eclairs.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2017/05/Eklery-solenaya-karamel-razrez-350x350.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Eclairs salted caramel</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="eclairs.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2017/05/992B5F36-CF28-4D5C-841F-1F2224E162A0-350x350.jpeg" alt="">
+                            </div>
+                            <div class="block1Text">Raspberry-passion fruit eclairs</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- -------------------------------------------------------------------------------------------------------------------------- -->
+    <section class="section" >                                      <!-- identical block, but I change informaion which stay inside -->
+        <div class="container">
+
+            <div class="sectionHeader">
+                <a href="sets.html" style="text-decoration: none;"><h2 class="sectionTitle">Sets of desserts</h2></a>
+            </div>
+
+            <div class="block1">
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <div class="block1Img">
+                            <img src="https://teabakery.ru/wp-content/uploads/2019/11/IMG_7741-350x350.jpg" alt="">
+                        </div>
+                        <div class="block1Text">Set Of Eclairs</div>
+                    </div>
+                </div>
+
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <div class="block1Img">
+                            <img src="https://teabakery.ru/wp-content/uploads/2020/02/2020-02-25-11.13.43-6-350x350.jpg" alt="">
+                        </div>
+                        <div class="block1Text">A set of mini Shu</div>
+                    </div>
+                </div>
+
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <div class="block1Img">
+                            <img src="https://teabakery.ru/wp-content/uploads/2018/08/Nabor-irisok-7-sht.-350x350.jpg" alt="">
+                        </div>
+                        <div class="block1Text">Set of cream toffees</div>
+                    </div>
+                </div>
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <div class="block1Img">
+                            <img src="https://teabakery.ru/wp-content/uploads/2018/08/Makarons-nabor-7-sht-v-rukah-350x350.jpg" alt="">
+                        </div>
+                        <div class="block1Text">Set of 6 pieces macarons</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.container -->
+
+    </section>
+    <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+    <section class="section" style="background-color: #F5F5F5">         <!-- identical block, but I change informaion which stay inside -->
+        <div class="container">
+
+            <div class="sectionHeader">
+                <a href="macarons.html" style="text-decoration: none;"><h2 class="sectionTitle">Macarons</h2></a>
+            </div>
+
+            <div class="block1">
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="macarons.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2018/08/Makarons-nabor-7-sht-v-rukah-350x350.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Set Of Macarons</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="macarons.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2018/07/Makarons-myata-malina-350x350.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Macarons mint-raspberry</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="macarons.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2018/07/Makarons-solenaya-karmel-350x350.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Macarons, salted caramel</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="block1Item">
+                    <div class="block1Section">
+                        <a href="macarons.html" style="text-decoration: none;">
+                            <div class="block1Img">
+                                <img src="https://teabakery.ru/wp-content/uploads/2018/07/makarons-klubnika-bazilik-e1532772699535-350x350.jpg" alt="">
+                            </div>
+                            <div class="block1Text">Macarons strawberry-Basil</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.container -->
+    </section>
+    <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+    <section class="section">                                                  <!-- block which consist information decoration os cakes -->
+        <div class="container">
+            <div class="sectionHeader">
+                <a href="decor.html" style="text-decoration: none;"><h2 class="sectionTitle">The options for decorating cakes</h2></a>
+                <p>In this section, you can choose the appropriate Cake design for any Occasion: Birthday, Wedding or Corporate party. And if You have your own idea of design-feel free to contact us and we will help you implement it!:)</p>
+            </div>
+        </div>
+
+        <div class="decor">
+            <div class="decorCol">
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2016/06/Tort-Svadebnyj-s-tsvetami-2018-5.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Fresh flowers</div>
+                    </div>
+                </div>
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2016/06/IMG_6429-1024x1024.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Hill of berries</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decorCol">
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2016/10/Tort-Ananas-1024x1024.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Chocolate decor</div>
+                    </div>
+                </div>
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2016/06/Tort-na-den-rozhdeniya-1024x1024.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Individual decor</div>
+                    </div>
+                </div>
+            </div>
+            <div class="decorCol">
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2019/11/IMG_8877-1024x1024.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Design for boys</div>
+                    </div>
+                </div>
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2018/05/Tort-kosmos-cherno-belyi-600-rub.-1024x1024.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Space design</div>
+                    </div>
+                </div>
+            </div>
+            <div class="decorCol">
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2016/10/2018-12-18-11.21.35-1-1024x1024.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Design for girls</div>
+                    </div>
+                </div>
+                <div class="decorSection">
+                    <img class="decorImg" src="https://teabakery.ru/wp-content/uploads/2018/05/Tort-Star-wars-1-600-rub.-1024x1024.jpg" alt="">
+                    <div class="decorName">
+                        <div class="decorTitle">Design Of “Superheroes”</div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.works -->
+    </section>
+    <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+    <!--Google map-->
+    <section class="section2" id="location"  style="background-color: #F5F5F5">
+        <div class="sectionHeader">
+            <a target="_blank" href="https://www.google.com/maps?ll=55.733497,37.553318&z=17&t=m&hl=ru&gl=KZ&mapclient=embed&cid=2736482846105165536" style="text-decoration: none;"><h2 class="sectionTitle">Our Location</h2></a>
+        </div>
+        <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.4440172191976!2d37.55109051842306!3d55.73341381787926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x25f9f0a6680c5ee0!2sTeabakery!5e0!3m2!1sru!2skz!4v1583897026683!5m2!1sru!2skz"  frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </section>
+</section>
+    <!--Google Maps-->
+    <!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+    <!-- Footer -->
+<div th:insert="blocks/footer :: footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>                                           <!--  connect jQuery a set of JavaScript functions that focuses on the interaction of JavaScript and HTML -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>                <!--  connect the cdn to using in js file -->   <!-- https://kenwheeler.github.io/slick/ -->
+
+
+
+</body>
+</html>

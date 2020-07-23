@@ -1,0 +1,830 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        <!-- to manage on mobile browsers -->
+        <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Montserrat:300i,400,700&amp;subset=cyrillic-ext" rel="stylesheet">      <!--  to add different font-families  -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">       <!--  bootstrap -->
+        <script>
+            $(function() {           /*$(document).ready(function() { ... });*/   /*A function that will start after the DOM has fully loaded*/
+
+                var headpoint = $("#header"),                               //calling the report function with id= " header"     -------- // вызываю функцию отчет с id="header"
+                    intpoint = $("#intro").innerHeight(),                  //calling the report function with id= " intro"      -------- // вызываю функцию отчет с id="header"
+                    scrolling = $(window).scrollTop();           //for the current scroll page                           -------- // для текущего scroll страницы чтобы при обнавление оставалось
+
+
+    /////////////////////////////////////////////////////first function
+
+
+                functionToScroll(scrolling);                          //scroll function for fixing header
+
+                $(window).on("scroll", function() {
+                    scrolling = $(this).scrollTop();
+
+                    functionToScroll(scrolling);
+                });
+
+                function functionToScroll(scrolling) {                //the function checks if (scrolling >= intpoint) the header becomes fixed
+                    if( scrolling >= intpoint ) {
+                        headpoint.addClass("fixed");
+                    } else {
+                        headpoint.removeClass("fixed");
+                    }
+                }
+
+
+    /////////////////////////////////////////////////////second function
+                $("#nawShow").on("click", function() {            //to make hamburger menu open when clicked
+                    $(this).toggleClass("active");                //this function for the cross in the menu when clicked
+                    $("#nav").toggleClass("active");              //this function for open the hamburger menu
+                });
+
+    /////////////////////////////////////////////////////third function
+                $("[data-slider]").slick({                  //to make the slider move when clicked
+                    infinite: true,
+                    slidesToShow: 1,                        //for show only one slider, if I write 2 we can show two slider
+                    slidesToScroll: 1                       //for show the slider
+                });
+
+            });
+
+        </script>
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 15px;
+                line-height: 1.6;
+                color: #333;
+            }
+
+            *,
+            *:before,
+            *:after {
+                box-sizing: border-box;
+            }
+
+
+            /*  --------------Container-------------- */
+            .container {
+                width: 100%;
+                max-width: 1230px;
+                padding: 0 15px;
+                margin: 0 auto;
+            }
+            /*----------------------------------------*/
+
+
+            /* ---------------Intro------------------ */
+            .intro {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                height: 100vh;
+                min-height: 820px;
+                position: relative;
+
+                background: url("https://sun9-62.userapi.com/c854020/v854020656/1c8875/H67tsVUzv5k.jpg") center no-repeat;
+                -webkit-background-size: cover;
+
+                background-attachment: fixed;
+                background-size: cover;
+            }
+
+            .introText {
+                width: 100%;
+                max-width: 880px;
+                margin: 0 auto;
+
+                text-align: center;
+            }
+
+            .introTitle {
+                margin-bottom: 20px;
+
+                font-family: 'Kaushan Script', cursive;
+                font-size: 72px;
+                color: #fff;
+            }
+            /*------------------------------------------*/
+
+
+
+            /* ---------------Header------------------- */
+            .header {
+                width: 100%;
+                padding-top: 30px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+            }
+
+            .header.fixed {
+                padding: 10px 0;
+                background-color: #6EC5EB;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                transform: translate3d(0, 0, 0);
+            }
+
+
+            .headerMenu {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+
+
+            /* -------------Nav--------------- */
+            .nav {
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+
+            .navLink {
+                display: inline-block;
+                vertical-align: top;
+                margin: 0 15px;
+                position: relative;
+
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                transition: color .1s linear;
+            }
+
+            .navLink:hover {
+                color: #fce38a;
+            }
+
+
+            .nawShow {
+                width: 30px;
+                padding: 10px 0;
+                display: none;
+
+                font-size: 0;
+                color: transparent;
+
+                border: 0;
+                background: none;
+                cursor: pointer;
+
+                position: absolute;
+                top: 24px;
+                right: 24px;
+                z-index: 1;
+            }
+
+            .nawShowBurger {
+                display: block;
+                width: 100%;
+                height: 3px;
+
+                background-color: #fff;
+
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+
+                transition: background .2s linear;
+            }
+
+            .nawShow.active .nawShowBurger {
+                background: none;
+            }
+
+            .nawShowBurger:before,
+            .nawShowBurger:after {
+                content: "";
+                width: 100%;
+                height: 3px;
+
+                background-color: #fff;
+
+                position: absolute;
+                left: 0;
+                z-index: 1;
+
+                transition: transform .2s linear;
+            }
+
+            .nawShowBurger:before {
+                top: -8px;
+            }
+
+            .nawShowBurger:after {
+                bottom: -8px;
+            }
+
+            .nawShow.active .nawShowBurger:before {
+                transform-origin: left top;
+                transform: rotate(45deg) translate3d(0px, -2px, 0)
+            }
+
+            .nawShow.active .nawShowBurger:after {
+                transform-origin: left bottom;
+                transform: rotate(-45deg) translate3d(0px, 3px, 0);
+            }
+
+            .button {
+                display: inline-block;
+                vertical-align: top;
+                padding: 8px 30px;
+
+                border: 3px solid #fff;
+
+                font-size: 14px;
+                font-weight: 700;
+                color: #fff;
+                text-transform: uppercase;
+                text-decoration: none;
+
+                transition: background .1s linear, color .1s linear;
+            }
+
+            .button:hover {
+                background-color: #fff;
+                color: #333;
+            }
+
+
+            /*-------------------Section----------------------*/
+            .section {
+                padding: 50px 0;
+
+                display: grid;
+                grid-column: 1fr 1fr;
+            }
+            .sectionHeader {
+                width: 100%;
+                max-width: 950px;
+                margin: 0 auto 50px;
+
+                text-align: center;
+            }
+
+            .sectionTitle {
+                font-size: 30px;
+                font-weight: 700;
+                color: #333;
+                text-transform: uppercase;
+            }
+            /*------------------------------------------------*/
+
+            /* --------------------block1---------------------*/
+            .block1{
+                margin: 40px -15px 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .block1Item {
+                width: 25%;
+                padding: 0 15px;
+            }
+
+            .block1Section {
+                position: relative;
+                background-color: #FFE773;
+            }
+
+            .block1Section:hover .block1Img {
+                transform: translate3d(-10px, -10px, 0);
+            }
+
+            .block1Section:hover .block1Img img {
+                opacity: .1;
+            }
+
+            .block1Section:hover .block1Text {
+                opacity: 1;
+            }
+
+            .block1Img {
+                background-image: /*linear-gradient(to bottom, #5ccccc, #74c594, #a9b45c, #dd974c, #ff7373)*/ #434449;
+
+                transition: transform .2s linear;
+            }
+
+            .block1Img img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                transition: opacity .1s linear;
+            }
+
+            .block1Text {
+                width: 100%;
+
+                font-size: 18px;
+                color: black;
+                text-transform: uppercase;
+                font-weight: 700;
+                text-align: center;
+                opacity: 0;
+
+                position: absolute;
+                top: 50%;
+                left: 0;
+                z-index: 2;
+                transform: translate3d(0, -50%, 0);
+
+                transition: opacity .2s linear;
+            }
+            /* ----------------------------------------- */
+
+            /*-------------------decor-------------------*/
+            .decor{
+                display: flex;
+            }
+
+            .decorCol {
+                flex: 1 1 0;
+            }
+
+            .decorSection {
+                position: relative;
+
+                background-image: linear-gradient(to right top, #6bd1cd, #5cccd8, #56c5e1, #5cbee7, #6bb5ea, #6ab8ef, #6abcf3, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+            }
+
+            .decorSection:hover .decorImg {
+                opacity: .1;
+            }
+
+            .decorSection:hover .decorName {
+                opacity: 1;
+            }
+
+            .decorImg {
+                display: block;
+                max-width: 100%;
+                height: auto;
+
+                transition: opacity .2s linear;
+            }
+
+            .decorName {
+                width: 100%;
+                padding: 0 15px;
+
+                text-align: center;
+                color: black;
+                opacity: 0;
+                font-weight: bold;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                z-index: 1;
+
+                transform: translate3d(0, -50%, 0);
+                transition: opacity .2s linear;
+            }
+
+            .decorTitle {
+                margin-bottom: 5px;
+
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+            /*----------------------------------------*/
+            /*-----------Map -----------*/
+            .section2{
+                padding: 50px 0;
+                display: grid;
+                grid-column: 1fr 1fr;
+            }
+            .map-container{
+                overflow:hidden;
+                padding-bottom:56.25%;
+                position:relative;
+                height:0;
+            }
+            .map-container iframe{
+                left:0;
+                top:0;
+                height:100%;
+                width:100%;
+                position:absolute;
+            }
+            /* -------------------------*/
+
+
+
+            /* ------------Footer------------- */
+            .footer {
+                padding-top: 30px;
+                background-color: #E7EAED;
+            }
+
+            .footerSection {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin: 0 -15px;
+                padding-bottom: 30px;
+            }
+
+            .footerCol {
+                padding: 0 15px;
+            }
+
+            .footer__col--first {
+                width: 40%;
+            }
+
+            .footer__col--second {
+                width: 29%;
+            }
+
+            .footer__col--third {
+                width: 22%;
+            }
+
+            .footerLogo {
+                margin-bottom: 30px;
+
+                font-size: 35px;
+                font-weight: 700;
+                color: #333;
+            }
+
+            .footerText {
+                margin-bottom: 30px;
+
+                font-size: 15px;
+                color: #333;
+            }
+
+            .footerSocial {
+                margin-bottom: 25px;
+            }
+
+            .footerSocial-content {
+                padding-top: 15px;
+
+                /*   font-size: 15px;
+                   color: #999;
+                   font-style: italic;
+                   font-weight: 300;*/
+            }
+
+            .footerSocial-content a {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 10px;
+
+                font-size: 18px;
+                color: #95e1d3;
+            }
+
+            .footerTitle {
+                margin: 30px 0;
+
+                font-size: 14px;
+                color: #333;
+                text-transform: uppercase;
+            }
+            /*------------------------------*/
+
+
+            /*----- soltial media -----*/
+            ul{
+                position: relative;
+                margin-top:  10px;
+                padding: 0;
+                display: flex;
+            }
+
+            ul li{
+                position: relative;
+                list-style: none;
+                width: 50px;
+                height: 50px;
+                margin: 0 30px;
+                transform: rotate(-30deg) skew(25deg);
+            }
+            ul li span{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #000;
+                transition: 0.5s;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 27px !important;
+            }
+            ul li:hover span{
+                box-shadow: -1px 1px 1px rgba(0,0,0,.1);
+            }
+            ul li:hover span:nth-child(5){
+                transform: translate(40px, -40px);
+                opacity: 1;
+            }
+            ul li:hover span:nth-child(4){
+                transform: translate(30px, -30px);
+                opacity: .8;
+
+            }
+            ul li:hover span:nth-child(3){
+                transform: translate(20px, -20px);
+                opacity: .6;
+
+            }
+            ul li:hover span:nth-child(2){
+                transform: translate(10px, -10px);
+                opacity: .4;
+            }
+            ul li:hover span:nth-child(1){
+                transform: translate(0, 0);
+                opacity: .2;
+            }
+            ul li:nth-child(1) span{
+                background: #3b5999;
+            }
+            ul li:nth-child(2) span{
+                background: #55acee;
+            }
+            ul li:nth-child(3) span{
+                border: linear-gradient(to right top, #fec260, #FF7E32, #FC0175, #CF029B, #7F16D3);
+                background-image: linear-gradient(to right top, #fec260, #FF7E32, #FC0175, #CF029B, #7F16D3);
+            }
+
+            /*-------soltial media -------*/
+
+
+            .footerSection1 {
+                display: flex;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+
+            .footerImg {
+                width: 120px;
+                height: 80px;
+            }
+
+            .footerContent {
+                padding-left: 20px;
+            }
+
+            .footerWords {
+                display: block;
+                margin-bottom: 5px;
+
+                color: #333;
+                font-size: 12px;
+                line-height: 1.5;
+                text-transform: uppercase;
+                text-decoration: none;
+            }
+
+            .footerWords:hover {
+                text-decoration: underline;
+            }
+
+            .footerSection2{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .footerBlock {
+                width: 33%;
+                border-bottom: 1px solid #fff;
+            }
+
+            .footerBlock img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+
+
+            .footerend {
+                padding: 10px 0;
+
+                border-top: 1px solid #1D3139;
+                line-height: 60%;
+                font-size: 14px;
+                color: #333;
+                text-align: center;
+            }
+            /*-------------------------------------*/
+
+
+
+            @media (max-width: 1224px) {
+
+                /* ----Intro--- */
+                .introTitle {
+                    font-size: 52px;
+                }
+                /*--------------*/
+            }
+
+            @media (max-width: 990px) {
+
+                /* ---Intro--- */
+                .introTitle {
+                    font-size: 32px;
+                }
+                /*-------------*/
+
+                /* ----Footer---- */
+                .footer__col--first {
+                    width: 100%;
+                }
+
+                .footer__col--second,
+                .footer__col--third {
+                    width: 50%;
+                }
+
+                .footerSection2{
+                    justify-content: flex-start;
+                }
+
+                .footerBlock {
+                    width: 33.33%;
+                    border-right: 1px solid white;
+                }
+                /*------------------*/
+            }
+
+            @media (max-width: 768px) {
+
+                /* ----Intro--- */
+                .intro {
+                    min-height: 650px;
+                }
+                /*--------------*/
+
+                /* ----Header---- */
+                .header {
+                    padding: 10px 0;
+                }
+
+                /* -----Nav---- */
+                .nav {
+                    display: none;
+                    width: 100%;
+
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+
+                    background-color: #6EC5EB;
+                }
+
+                .nav.active {
+                    display: block;
+                }
+
+                .navLink {
+                    display: block;
+                    margin: 0;
+                    padding: 8px 20px;
+                }
+
+                .nawShow {
+                    display: block;
+                }
+                /*--------------*/
+
+                /* ------Section----- */
+                .section {
+                    padding: 40px 0;
+                }
+                /*--------------------*/
+
+                /* ------block1------ */
+                .block1{
+                    margin-top: 50px;
+                    justify-content: center;
+                }
+
+                .block1Item {
+                    width: 100%;
+                    max-width: 410px;
+                    margin-bottom: 30px;
+                }
+
+                .block1Item:last-child {
+                    margin-bottom: 0;
+                }
+                /*--------------------*/
+                /* ------decor--------*/
+                .decor{
+                    flex-wrap: wrap;
+                }
+
+                .decorCol {
+                    flex: none;
+                    width: 50%;
+                }
+                /*--------------------*/
+
+                /* ------Footer------ */
+                .footer__col--second,
+                .footer__col--third {
+                    width: 100%;
+                }
+            }
+
+
+            @media (max-width: 550px) {
+
+                /* -------Intro------- */
+                .introTitle {
+                    font-size: 22px;
+                }
+                /*---------------------*/
+
+                /* -------Section------- */
+                .sectionHeader {
+                    margin-bottom: 50px;
+                }
+                /*---------------------*/
+
+                .sectionTitle {
+                    font-size: 24px;
+                }
+
+                .sectionTitle:after {
+                    margin: 20px auto;
+                }
+
+
+                /* -------decor-------*/
+                .decorCol {
+                    width: 100%;
+                }
+                /*---------------------*/
+
+
+                /* -------Blogs------- */
+                .footerImg {
+                    width: 80px;
+                    height: 50px;
+                }
+
+                .footerWords {
+                    font-size: 10px;
+                }
+                /*---------------------*/
+            }
+        </style>
+
+    </head>
+    <body>
+
+<!--class,id teg name -->         <!-- comments for teacher;) -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <header th:insert="blocks/header :: header"></header>
+
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- Footer -->
+        <section id="main_____information">           <!-- section -->            <!-- main_____information there stay main content of page  -->
+            <!-- Intro -->
+            <div th:insert="blocks/intro :: intro"/>
+            <div class="container mt-5 mb-5">
+                <h1>Our recipes</h1>
+                <div th:each="element : ${posts}" class="alert alert-secondary mt-2">
+                    <h3 th:text="${element.title}" />
+                    <a th:href="'/recipes/' + ${element.id}" class="btn btn-primary">Recipe</a>
+                </div>
+                <a th:href="'/recipes/addRecipes' " class="btn btn-primary">Add own recipes</a>
+                <br>
+            </div>
+
+            <div th:insert="blocks/footer :: footer"></div>
+        </section>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>                                           <!--  connect jQuery a set of JavaScript functions that focuses on the interaction of JavaScript and HTML -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>                <!--  connect the cdn to using in js file -->   <!-- https://kenwheeler.github.io/slick/ -->
+
+    </body>
+</html>
